@@ -1,20 +1,20 @@
 cluster,e1,e2,e3,e4,e5
-0,Paris,Ojinaga,Mexico,Buffalo,Zinedine
-1,Nassau,The Bahamas,Miami,FL,February 2004
-2,Chitral,Moscow,Plasencia St.,Central Russia Airlines,Boris Bugarov
-3,Newark,Adnan Hijazi,September 2004,"$ 48,000",Reston
-4,Panama City,Ramundo Ortiz,Panamico Ave,Panama,"$ 150,000"
-5,Casablanca,Holland Orange Shipping Lines,October 2003,Dominican Republic,Sahara Atlantic Hotel
-6,Cartagena,Guane,Houston,Victoria,Mexico
-7,Santo Domingo,Carlos Morales,Jose Escalante,FMD,November 2003
-8,La Mirada St.,Tampico,Mexico,Los Andes Hotel,Bogota
-9,Ontario,Windsor,July 2003,Marrakech,July
-10,Moscow,Russia,Vector,Middle East,Central Russia Airlines
-11,Freeport,Muslih Odeh,Freeport Star Hotel,Nassau,Bahamas
-12,London,December 2002,Raeed Beandali,CIA,Toronto
-13,Riyadh,Abdul al Nami,U.S.,Saudi Arabia,Fenkell Ave.
-14,Texas,Houston,Bellaire,US,Khalid Shamrani
-15,Cairo,Ramses St.,Egypt,18 January 2004,5 December 2003
-16,Badawi,2001,Peshawar,Mamdouh al Hazmi,January 2003
-17,August 2004,Carrizo Springs,TX,Piedras Negras,Ali al-Omari
-18,Amsterdam,Yazid Bafaba,Los Angeles,Buckthorn St,Culver City
+0,Mexico,La Mirada St.,Tampico,Los Andes Hotel,Bogota
+1,Nassau,Freeport,Bahamas,The Bahamas,Omar Hanif
+2,Newark,Adnan Hijazi,September 2004,Reston,"$ 48,000"
+3,Texas,Bellaire,US,Khalid Shamrani,Shamrani
+4,Santo Domingo,Carlos Morales,Jose Escalante,FMD,November 2003
+5,Moscow,Central Russia Airlines,Vector,Pyotr Safrygin,Russia
+6,December 2002,Raeed Beandali,London,February 2004,CIA
+7,Panama City,Ramundo Ortiz,Panamico Ave,Panama,"$ 150,000"
+8,April 2003,Abu Hafs,Mehdi Rafiki,Montreal,Chicago
+9,Paris,Ontario,Windsor,Buffalo,Canada
+10,Abdul al Nami,Fenkell Ave.,Detroit Utilities Co.,Ronald ] Derwish,March 2004
+11,Chitral,Peshawar,Plasencia St.,Seashore Hotel,July
+12,February 2004,Miami,Jamal al Shibh,FL,Saudi
+13,U.S.,Muhammed Dandani,Middle Eastern,Miami,1996
+14,Casablanca,Sahara Atlantic Hotel,October,Karachi,Peshawar
+15,Holland Orange Shipping Lines,Santo Domingo,Casablanca,Dominican Republic,Holland Orange
+16,Cairo,Ramses St.,Egypt,18 January 2004,5 December 2003
+17,Badawi,October 2003,Mamdouh al Hazmi,Chitral,January 2003
+18,TX,Texas,Carrizo Springs,August 2004,December 2004
