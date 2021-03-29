@@ -25,6 +25,7 @@ function drawList(){
       // select the list svg
       let list = d3.select('#listDiv');
 
+      // y position for drawing divs - increments by 20 
       let y = 0;
 
       // remove all list items
@@ -187,6 +188,9 @@ function dragged(event, d) {
       // set the flag that element has been dragged - ie not a click
       isDragged = true;
 
+      // remove any old drag lines
+      d3.selectAll('.dragLine').remove();
+
       // get the top and bottom of div scroll position
       let scrollTopY = $("#listDiv").scrollTop();
       let scrollBotY = $("#listDiv").scrollTop() + $("#listDiv").height();
@@ -195,14 +199,14 @@ function dragged(event, d) {
       let currYListPos = scrollTopY  + d3.pointer(event)[1] 
 
       // if mouse position is close to top then scroll list div up
-      if(currYListPos < scrollTopY + 175 && event.x < 20){
+      if(currYListPos < scrollTopY + 175 && event.x < 175){
             let newScroll = $("#listDiv").scrollTop() - 20;
             if(newScroll < 0) {newScroll = 0}
             $("#listDiv").scrollTop(newScroll);
       }
 
       // if mouse position is close to bottom then scroll list div down
-      if(currYListPos > scrollBotY + 80 && event.x < 20){
+      if(currYListPos > scrollBotY + 80 && event.x < 175){
             let newScroll = $("#listDiv").scrollTop() + 20;
             if(newScroll > scrollBotY - $("#listDiv").height()) {scrollBotY - $("#listDiv").height()}
             $("#listDiv").scrollTop(newScroll);
@@ -214,43 +218,44 @@ function dragged(event, d) {
 
       // if in list box - left pane
       if(event.x < 175){
-            let cood = d3.pointer(event)
             // adjust x and y of object being dragged
-            d3.select(this)
+            let elem = d3.select(this)
                   .style('left',function(){return event.x.toString() + "px"})
-                  .style('top',function(){
-                        // if dragged item is file then can not drag out of cluster
-                        let elem = d3.select(this);
-                        let clusterNumber = parseInt(elem.attr('cluster'))
-                        if(isNaN(clusterNumber)){
-                              // get div of parent
-                              parent = $('#cluster'+ d.cluster)
-                        }
-                        
-                        return event.y.toString() + "px"})
+                  .style('top',function(){                        
+                        return event.y.toString() + "px"
+                  })
                   .classed('listDrag', true)
                   .classed('listHover', false);
             
-            // // add arrow to show drop position
-            // // get current Y to nearest int
-            // let dropY = Math.round(event.y);
-
-            // // get list svg
-            // let list = d3.select("#list")
-
-            // // remove old arrows
-            // list.selectAll('.listArrow').remove();
-            // // create d3 path generator
-            // let path = d3.path();
-            // path.moveTo(0,dropY - .5);
-            // path.lineTo(1,dropY);
-            // path.lineTo(0,dropY + .5);
-            // path.closePath();
-            // // append path (arrow) to list
-            // list.append('path')
-            //       .attr('d',path)
-            //       .classed('listArrow',true);
+            // add line to show drop position
+            // get list 
+            //.node().getBoundingClientRect().top;
+            // select the correct div to append line to
+            let list = null;
+            console.log(elem.classed())
+            if(elem.classed('cluster')){
+                  list = d3.select('#listDiv')
             }
+            else{
+                  list = d3.select('#cluster'+ d.cluster)
+            }
+            list.append('div')
+                  .classed('dragLine', true)
+                  .style('top', function(){
+                        // snap to the closest multiple of 20
+                        let lineY = event.y - 20;
+                        let tmp = lineY / 20.0;
+                        if(lineY - Math.floor(tmp)*20 < lineY - Math.ceil(tmp)*20){
+                              lineY = lineY - Math.floor(tmp)*20;
+                        }
+                        else{
+                              lineY = Math.ceil(tmp)*20
+                        }
+                        console.log(lineY)
+                        return lineY.toString() + 'px'
+                  })
+                  .style('left', '0px')
+      }
       // if in right pane - then add '+' to detail pane
       else{
             let cood = d3.pointer(event)
@@ -555,6 +560,7 @@ function getSelected(){
       return sel;
 }
 
+// sets selected field to 0 for all files
 function clearSelectedFiles(){
       // for each cluster - set selected to 0 for all files
       dataFiles.forEach(function(val,key,map){

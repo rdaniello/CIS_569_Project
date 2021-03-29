@@ -47,7 +47,6 @@ h2.typing-txt::after{
   color: yellow;
 }
 .listDrag{
-  left:25px;
   color:rgb(71, 161, 48);
 }
 
@@ -70,11 +69,6 @@ h2.typing-txt::after{
 }
 .bold{
   font-weight:bold;
-}
-.listArrow{
-  stroke: blue;
-  stroke-width: .01;
-  fill:red;
 }
 
 html{
@@ -111,4 +105,12 @@ html{
 }
 .openAll{
   float: right;
+}
+.dragLine{
+  background-color: transparent;
+  width:100%;
+  height:20px;
+  position:absolute;
+  color:red;
+  border-bottom: 2px solid red;
 }
