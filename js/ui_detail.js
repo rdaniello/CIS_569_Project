@@ -85,7 +85,61 @@ function displaySelectedFiles(){
     
     detailDivs
           .append('div')
-          .text(function(d){return d.text})
+          .html(function(d){
+                let tmpHTML = getDetailDivHTML(d.text, dataClusters[d.cluster])
+                return tmpHTML;
+            })
           .style('padding-left', '10px')
           .style('padding-top', '10px')
+}
+
+// this function generates highlighted html of the
+// file contents
+function getDetailDivHTML(fileTxt, cData){
+      let divHTML = '';
+      let entities =[]
+
+      // get an array of the entities
+      // may need spliting - ie for dates and full names
+      let tmpStrArr = cData.e1.split(" ");
+      tmpStrArr.forEach(element => {
+            entities.push(element);
+      });
+
+      tmpStrArr = cData.e2.split(" ");
+      tmpStrArr.forEach(element => {
+            entities.push(element);
+      });
+
+      tmpStrArr = cData.e3.split(" ");
+      tmpStrArr.forEach(element => {
+            entities.push(element);
+      });
+
+      tmpStrArr = cData.e4.split(" ");
+      tmpStrArr.forEach(element => {
+            entities.push(element);
+      });
+
+      tmpStrArr = cData.e5.split(" ");
+      tmpStrArr.forEach(element => {
+            entities.push(element);
+      });
+
+      // get the text as tokens
+      let tokens = fileTxt.split(" ");
+
+      // build html
+      tokens.forEach(e =>{
+            strippedToken = e.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+            strippedToken = strippedToken.replace(/\s{2,}/g," ");
+
+            if(entities.includes(strippedToken)){
+                  divHTML = divHTML + "<span style='color:red; font-weight:bold'>" + e + ' </span>';
+            }
+            else{
+                  divHTML = divHTML + "<span>" + e + ' </span>';
+            }
+      })
+      return divHTML;
 }
