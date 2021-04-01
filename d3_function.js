@@ -232,7 +232,6 @@ function dragged(event, d) {
             //.node().getBoundingClientRect().top;
             // select the correct div to append line to
             let list = null;
-            console.log(elem.classed())
             if(elem.classed('cluster')){
                   list = d3.select('#listDiv')
             }
@@ -251,7 +250,7 @@ function dragged(event, d) {
                         else{
                               lineY = Math.ceil(tmp)*20
                         }
-                        console.log(lineY)
+
                         return lineY.toString() + 'px'
                   })
                   .style('left', '0px')
@@ -409,9 +408,6 @@ function reorderFiles(elem, datum){
 
             // splice clusters file item array in correct order
             dataFiles.get(datum.cluster).splice(newIdx, 0, datum);
-
-            let ffff = dataFiles.get(datum.cluster)
-            console.log(ffff)
       }
 }
 
@@ -477,7 +473,7 @@ function displaySelectedFiles(){
             .classed('detailDiv',true)
             .on('click', function(event,d){
                   let elem = d3.select(this);
-                  console.log(elem.style('height'))
+
                   // if expanded then collapse and hide scroll
                   if(elem.style('height') == '150px'){
                         elem.style('overflow-y', 'hidden')
