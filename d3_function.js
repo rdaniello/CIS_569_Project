@@ -281,7 +281,7 @@ function dragged(event, d) {
             detail.append('div')
                   .text("+ " + selectedCount + " Selected Files")
                   .style('left',(cood[0] - listwidth).toString() + "px")
-                  .style('top',cood[1].toString() + "px")
+                  .style('top',event.y + "px")
                   .classed('detailHover', true)
                   .style('font-size','20pt')
       }
