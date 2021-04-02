@@ -28,7 +28,7 @@ function displaySelectedFiles(){
                       elem.transition()
                             .duration(200)
                             .ease(d3.easeBounce)
-                            .style('height', '20px')
+                            .style('height', '35px')
                             
                 }
                 else{
