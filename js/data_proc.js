@@ -16,9 +16,6 @@ function main(data){
    
       // draw the list
       drawList();
-
-      // draw the scatter plot
-      drawScatter();
 }
 
 // return data json item where selected equals 1
@@ -48,12 +45,9 @@ function clearSelectedFiles(){
 // builds and returns map of json objects to be consumed by D3
 // file data
 function buildJSONFiles(inData){
-    // change cluster and position coordinates to number
+    // change cluster to number
     inData.forEach(function(item){
-          // convert strings to floats
           item.cluster = +item.cluster;
-          item.xPos = +item.xPos;
-          item.yPos = +item.yPos;
           item.selected = 0;
     })
 

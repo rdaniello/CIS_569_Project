@@ -8,9 +8,7 @@ import nltk
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.preprocessing import StandardScaler
-from sklearn.manifold import MDS
-from sklearn.decomposition import PCA
+from scipy.cluster.hierarchy import ward, dendrogram
 import matplotlib.pyplot as plt
 import pickle
 import csv
@@ -120,26 +118,6 @@ def process_data(run_optK, create_TFIDF, optK):
             print('  ' + featureNames[order_centroids[centNum][idx]]) 
         rows.append(row)
 
-    # CODE for project 3
-    # get distance matrix
-    dist = 1- cosine_similarity(tfidf_matrix)
-
-    # perform MDS to 2 dimensions
-    mds  = MDS(n_components=2, dissimilarity="precomputed", random_state=1)
-    docPosition = mds.fit_transform(dist)
-
-    # PCA
-    # X = tfidf_matrix.todense()
-    # docPosition = PCA(n_components=2).fit_transform(X)
-
-    # get x and y arrays
-    xPos = [el[0] for el in docPosition]
-    yPos = [el[1] for el in docPosition]
-    
-    # df = pd.DataFrame(dist)
-    # sorteIdx = np.argsort(df)
-    # print(df)
-
     # write cluster data to csv file 
     filename = "../data/processed_data/processed_clusters.csv"
     with open(filename, 'w', newline='') as csvfile:  
@@ -147,12 +125,20 @@ def process_data(run_optK, create_TFIDF, optK):
         csvwriter.writerow(fields) 
         csvwriter.writerows(rows)
 
-    #print(order_centroids)
+    print(order_centroids)
 
     # write file data to csv file
-    docs = { 'name': titles, 'text': content, 'cluster': clusters, 'xPos': xPos, 'yPos': yPos}
-    frame = pd.DataFrame(docs, index = [clusters] , columns = ['name', 'text', 'cluster', 'xPos', 'yPos'])
+    docs = { 'name': titles, 'text': content, 'cluster': clusters}
+    frame = pd.DataFrame(docs, index = [clusters] , columns = ['name', 'text', 'cluster'])
+    print(frame['cluster'].value_counts())
     frame.to_csv(r'../data/processed_data/processed_files.csv', index = False, header=True)
+
+    # # CODE for project 3
+    # # get distance matrix
+    # dist = 1- cosine_similarity(tfidf_matrix)
+    # df = pd.DataFrame(dist)
+    # sorteIdx = np.argsort(df)
+    # print(df)
 
 # runs K-means on data with range of k values
 # saves plot of results for analysis
