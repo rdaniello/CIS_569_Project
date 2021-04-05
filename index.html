@@ -9,6 +9,8 @@
       <script src= "./js/ui_list.js"></script>
       <!-- detail pane javascript code  -->
       <script src= "./js/ui_detail.js"></script>
+      <!-- MDS scatterplot javascript code -->
+      <script src= "./js/ui_mds.js"></script>
       <head> 
             <title> Data Visualization_CIS569 </title> 
             <meta charset="utf-8"> 
@@ -27,7 +29,10 @@
             </div>
                 
             <div class="split right">
-                  <div id="detail"> </div>
+                  <div id="detail" style='position:relative; height:50%; border-bottom:1px solid black; overflow-y: scroll;'></div>
+                  <div id="distanceDiv" style='position:relative; height:50%'>
+                        <svg id='scatterPlot' style='width:100%; height:100%'></svg>
+                  </div>
             </div>
       </body> 
 </html>
