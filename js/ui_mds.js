@@ -66,7 +66,7 @@ function drawScatter(){
                 return "white"
             }
         })
-        .on('click', function(evt, d){
+        .on('click', function(evt, d){ // open file in detail pane
             d.selected = 1;
             displaySelectedFiles();
             drawList();
@@ -172,6 +172,19 @@ function drawLegend(){
             // make all circles the same size
             scatterCanvas.selectAll('circle').attr('r', 4);
         })
+        .on('click', function(evt, d){ // open all files in cluster
+            // change all files to unslected.
+            clearSelectedFiles();
+
+            // mark all files iin cluster as selected
+            dataFiles.get(d.cluster).forEach(function(el){
+                el.selected = 1;
+            })
+
+            // redraw the ui
+            displaySelectedFiles();
+            drawList();
+        })
 
     // append legend color
     plotSVG.selectAll('.legendRects').remove();
@@ -207,6 +220,19 @@ function drawLegend(){
                 let scatterCanvas = d3.select('.circleGrp');
                 // make all circles the same size
                 scatterCanvas.selectAll('circle').attr('r', 4);
+            })
+            .on('click', function(evt, d){ // open all files in cluster
+                // change all files to unslected.
+                clearSelectedFiles();
+    
+                // mark all files iin cluster as selected
+                dataFiles.get(d.cluster).forEach(function(el){
+                    el.selected = 1;
+                })
+    
+                // redraw the ui
+                displaySelectedFiles();
+                drawList();
             })
 }
 
