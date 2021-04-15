@@ -3,12 +3,14 @@
       <!-- Load D3, jQuery and code for this project-->
       <script src="https://d3js.org/d3.v6.js" charset="utf-8"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <!-- javascript data loading and processing for UI -->
-      <script src= "./js/data_proc.js"></script>
       <!-- list pane javascript code -->
       <script src= "./js/ui_list.js"></script>
       <!-- detail pane javascript code  -->
       <script src= "./js/ui_detail.js"></script>
+      <!-- MDS scatterplot javascript code -->
+      <script src= "./js/ui_mds.js"></script>
+      <!-- javascript data loading and processing for UI -->
+      <script src= "./js/data_proc.js"></script>
       <head> 
             <title> Data Visualization_CIS569 </title> 
             <meta charset="utf-8"> 
@@ -27,7 +29,20 @@
             </div>
                 
             <div class="split right">
-                  <div id="detail"> </div>
+                  <div id="detail" style='position:relative; height:100%; width:50%; border-right:1px solid black; overflow-y: scroll; float:left'>
+                        <span style='font-size: 16px; font-weight: bold; text-decoration:underline; margin-left:50%'>File Detail</span>
+                  </div>
+                  <div id="distanceDiv" style='position:relative; width:48%; height:75%;float:left'>
+                        <div>
+                              <span style='font-size: 16px; font-weight: bold; text-decoration:underline; margin-left:50%'>File Similarity</span>
+                        </div>
+                        <div style = 'width:100%;'>
+                              <svg id='scatterLegend' style='width:100%;'></svg>
+                        </div>
+                        <div style='width:100%; height:100%;'>
+                              <svg id='scatterPlot' style='width:100%; height:100%'></svg>
+                        </div>
+                  </div>
             </div>
       </body> 
 </html>

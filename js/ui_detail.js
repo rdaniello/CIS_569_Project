@@ -12,35 +12,45 @@ function displaySelectedFiles(){
 
     // add div for each selected file in list to right pane
     var detailDivs = detail.selectAll('div')
-          .data(selectedFiles)
-          .enter()
-          .append("div")
-          .style("font", "14px 'Helvetica Neue'")
-          .style("height", '150px')
-          .style('overflow-y', 'scroll')
-          .classed('detailDiv',true)
-          .on('click', function(event,d){
-                let elem = d3.select(this);
+            .data(selectedFiles)
+            .enter()
+            .append("div")
+            .style("font", "14px 'Helvetica Neue'")
+            .style("height", '150px')
+            .style('overflow-y', 'scroll')
+            .classed('detailDiv',true)
+            .on('click', function(event,d){
+                  let elem = d3.select(this);
 
-                // if expanded then collapse and hide scroll
-                if(elem.style('height') == '150px'){
-                      elem.style('overflow-y', 'hidden')
-                      elem.transition()
-                            .duration(200)
-                            .ease(d3.easeBounce)
-                            .style('height', '35px')
-                            
-                }
-                else{
-                      // expand div and add scroll
-                      elem.style('overflow-y', 'scroll')
-                      elem.transition()
-                            .duration(200)
-                            .ease(d3.easeBounce)
-                            .style('height', '150px')
-                            .style('overflow-y', 'scroll')
-                }
-          })
+                  // if expanded then collapse and hide scroll
+                  if(elem.style('height') == '150px'){
+                        elem.style('overflow-y', 'hidden')
+                        elem.transition()
+                              .duration(200)
+                              .ease(d3.easeBounce)
+                              .style('height', '35px')
+                              
+                  }
+                  else{
+                        // expand div and add scroll
+                        elem.style('overflow-y', 'scroll')
+                        elem.transition()
+                              .duration(200)
+                              .ease(d3.easeBounce)
+                              .style('height', '150px')
+                              .style('overflow-y', 'scroll')
+                  }
+            })
+            .on("mousemove",function (mouseData,d){
+                  // get the data point in scatter plot
+                  let dataPoint = d3.select('#cir_' + d.name);
+                  dataPoint.attr('r', 8);
+            })  
+            .on("mouseleave",function (mouseData,d){
+                  let scatterCanvas = d3.select('.circleGrp');
+                  // make all circles the same size
+                  scatterCanvas.selectAll('circle').attr('r', 4);
+            })
     
     // add 'x' to close and deselect item
     detailDivs

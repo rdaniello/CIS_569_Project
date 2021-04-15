@@ -4,64 +4,80 @@ function drawList(){
     let list = d3.select('#listDiv');
 
     // y position for drawing divs - increments by 20 
-    let y = 0;
+    let y = 20;
 
     // remove all list items
     list.selectAll('div').remove();
+
+    // Add pane title
+    list.append('div')
+      .html("<span style='font-size: 16px; font-weight: bold; text-decoration:underline; margin-left:30%'>File List</span>")
 
     // add one div for each cluster
     for(let i =0; i < dataClusters.length; i++){
           y += 20;
           let tmpDiv = list.append('div')
-                .datum(dataClusters[i])
-                .attr('id','cluster'+ dataClusters[i].cluster)
-                .attr('cluster', dataClusters[i].cluster)
-                .style('top', y + 'px')
-                .classed('cluster',true)
-                .classed('fileGroupCol',function(){
-                      if(dataClusters[i].expanded == 0){
-                            return true;
-                      }
-                      else{
-                            return false;
-                      }
-                })
-                .classed('fileGroupEx',function(){
-                      if(dataClusters[i].expanded == 1){
-                            return true;
-                      }
-                      else{
-                            return false;
-                      }
-                })
-                .on('click', function(evt, d){
-                      let elem = d3.select(this)
-                      let cluster = parseInt(elem.attr('cluster'));
-                      // if expanded then collapse
-                      if(d.expanded == 1){
-                            elem.classed('fileGroupEx', false)  
-                            elem.classed('fileGroupCol', true)  
-                            let icon = elem.select('.grpIcon')
-                            icon.html('+')
-                            // set the list flag to collapse
-                            d.expanded = 0;
-                      }
-                      else{// if collapsed then expand
-                            elem.classed('fileGroupEx', true)  
-                            elem.classed('fileGroupCol', false) 
-                            let icon = elem.select('.grpIcon')
-                            icon.html('-')
-                            // set the list flag to expand
-                            d.expanded = 1;
-                      }
-                      drawList();
-                })
-                // assign drag events to file item
-                .call(d3.drag()
-                      .on("start", dragstarted)
-                      .on("drag", dragged)
-                      .on("end", dragendedCluster)
-                );
+            .datum(dataClusters[i])
+            .attr('id','cluster'+ dataClusters[i].cluster)
+            .attr('cluster', dataClusters[i].cluster)
+            .style('top', y + 'px')
+            .classed('cluster',true)
+            .classed('fileGroupCol',function(){
+                  if(dataClusters[i].expanded == 0){
+                        return true;
+                  }
+                  else{
+                        return false;
+                  }
+            })
+            .classed('fileGroupEx',function(){
+                  if(dataClusters[i].expanded == 1){
+                        return true;
+                  }
+                  else{
+                        return false;
+                  }
+            })
+            .on("mousemove",function (mouseData,d){
+                  let scatterCanvas = d3.select('.circleGrp');
+                  
+                  // outline all circles in the cluster
+                  let clusterCircles = scatterCanvas.selectAll('.cluster' + d.cluster)
+                  clusterCircles.attr('r', 8)
+            })
+            .on("mouseleave",function (mouseData,d){
+                  let scatterCanvas = d3.select('.circleGrp');
+                  // make all circles the same size
+                  scatterCanvas.selectAll('circle').attr('r', 4);
+            })
+            .on('click', function(evt, d){
+                  let elem = d3.select(this)
+                  let cluster = parseInt(elem.attr('cluster'));
+                  // if expanded then collapse
+                  if(d.expanded == 1){
+                        elem.classed('fileGroupEx', false)  
+                        elem.classed('fileGroupCol', true)  
+                        let icon = elem.select('.grpIcon')
+                        icon.html('+')
+                        // set the list flag to collapse
+                        d.expanded = 0;
+                  }
+                  else{// if collapsed then expand
+                        elem.classed('fileGroupEx', true)  
+                        elem.classed('fileGroupCol', false) 
+                        let icon = elem.select('.grpIcon')
+                        icon.html('-')
+                        // set the list flag to expand
+                        d.expanded = 1;
+                  }
+                  drawList();
+            })
+            // assign drag events to file item
+            .call(d3.drag()
+                  .on("start", dragstarted)
+                  .on("drag", dragged)
+                  .on("end", dragendedCluster)
+            );
           tmpDiv
                 .append('span')
                 .classed('grpIcon', true)
