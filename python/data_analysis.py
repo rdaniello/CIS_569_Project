@@ -141,7 +141,7 @@ def process_data(run_optK, create_TFIDF, optK):
     # print(df)
 
     # write cluster data to csv file 
-    filename = "../data/processed_data/processed_clusters.csv"
+    filename = "../data/processed_data/processed_clustersv3.csv"
     with open(filename, 'w', newline='') as csvfile:  
         csvwriter = csv.writer(csvfile) 
         csvwriter.writerow(fields) 
@@ -152,7 +152,7 @@ def process_data(run_optK, create_TFIDF, optK):
     # write file data to csv file
     docs = { 'name': titles, 'text': content, 'cluster': clusters, 'xPos': xPos, 'yPos': yPos}
     frame = pd.DataFrame(docs, index = [clusters] , columns = ['name', 'text', 'cluster', 'xPos', 'yPos'])
-    frame.to_csv(r'../data/processed_data/processed_files.csv', index = False, header=True)
+    frame.to_csv(r'../data/processed_data/processed_filesv3.csv', index = False, header=True)
 
 # runs K-means on data with range of k values
 # saves plot of results for analysis
