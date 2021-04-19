@@ -111,6 +111,14 @@ function drawList(){
                                   return false;
                             }
                       })
+                      .classed('scatterHlight', function(d){
+                              if(d.scatterHlight == 1){
+                                    return true;
+                              }
+                              else{
+                                    return false;
+                              }
+                        })
                       .style('top', function(d){
                             clusterY+=20;
                             y+=20;

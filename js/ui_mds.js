@@ -2,7 +2,7 @@ function drawScatter(){
     // select the scatter plot svg
     let plotSVG = d3.select('#scatterPlot');
 
-    // margins - also set in filters so lines draw correctly
+    // margins - 
     let margT = 35;
     let margB = 10;
     let margL = 10;
@@ -75,7 +75,7 @@ function drawScatter(){
             displaySelectedFiles();
             drawList();
         })
-        .on("mousemove",function (mouseData,d){
+        .on("mouseenter",function (mouseData,d){
             let plotSvg = d3.select('#scatterPlot');
             // remove old detail elements
             plotSvg.selectAll('.detailGrp').remove();
@@ -102,11 +102,45 @@ function drawScatter(){
             // outline all circles in the cluster
             let clusterCircles = scatterCanvas.selectAll('.cluster' + d.cluster)
             clusterCircles.attr('r', 8)
+
+            // highlight the file name in the list
+            // get the cluster and expand it if is collapssed
+            let clusterItem = dataClusters.find(el => el.cluster == d.cluster)
+            // remember if already expanded
+            if(clusterItem.expanded == 1){
+                clusterItem.prevEx = 1;
+            }
+            else{
+                clusterItem.prevEx = 0;
+            }
+            clusterItem.expanded = 1;
+
+            // change the 'selected' value 
+            d.scatterHlight = 1;
+
+            // redraw the list
+            drawList();
         })
         .on("mouseleave",function (mouseData,d){
             let plotSvg = d3.select('#scatterPlot');
             // remove old detail elements
             plotSvg.selectAll('.detailGrp').remove();
+
+            // if cluster not previously expanded collapse it
+            let clusterItem = dataClusters.find(el => el.cluster == d.cluster)
+            if(clusterItem.prevEx == 1){
+                clusterItem.expanded = 1;
+            }
+            else{
+                clusterItem.expanded = 0;
+            }
+            clusterItem.expanded = clusterItem.prevEx;
+
+            // remove highlighted class
+            d.scatterHlight = 0;
+
+            // redraw the list
+            drawList();
 
             // blankify detail text
             let detailGrp = plotSvg.append('g')

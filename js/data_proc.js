@@ -55,6 +55,7 @@ function buildJSONFiles(inData){
           item.xPos = +item.xPos;
           item.yPos = +item.yPos;
           item.selected = 0;
+          item.scatterHlight = 0;
     })
 
     // group by cluster
@@ -70,6 +71,7 @@ function buildJSONClusters(inData){
     inData.forEach(function(item){
           item.expanded = 0;
           item.cluster = +item.cluster;
+          item.prevEx = 0;
     })
 
     return inData;

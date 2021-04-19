@@ -132,3 +132,6 @@ html{
   stroke: red;
   stroke-width: 2px;
 }
+.scatterHlight{
+  color: yellow;
+}
