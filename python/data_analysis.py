@@ -125,7 +125,7 @@ def process_data(run_optK, create_TFIDF, optK):
     dist = 1- cosine_similarity(tfidf_matrix)
 
     # perform MDS to 2 dimensions
-    mds  = MDS(n_components=2, dissimilarity="precomputed", random_state=0)
+    mds  = MDS(n_components=2, dissimilarity="precomputed", random_state=1)
     docPosition = mds.fit_transform(dist)
 
     # PCA

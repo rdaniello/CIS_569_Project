@@ -6,7 +6,6 @@ h2.typing-txt{
   font-size: 30px;
   font-family: "Nanum Gothic";
   height: 35px; overflow: hidden;
-  animation: typingAni 2s steps(30, end) 1;
 }
 h2.typing-txt::after{
   position:relative; 

@@ -4,7 +4,7 @@ let dataFiles = new Map(); // the files in json object array
 let dataClusters = new Map(); // the files in json object array
 let isDragged = false; // flag to discern between drag and click events
 
-// load the data files
+// load the data files - then call main -- bootstrapping of application
 Promise.all(
       [d3.csv(dataFileFiles), d3.csv(dataFileClusters)],d3.autoType()).then(main)
 
