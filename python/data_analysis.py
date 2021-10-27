@@ -109,12 +109,12 @@ def process_data(run_optK, create_TFIDF, optK):
     order_centroids = km.cluster_centers_.argsort()[:, ::-1] 
 
     # extract top five entities for each cluster
-    fields = ['cluster', 'e1', 'e2', 'e3', 'e4','e5']
+    fields = ['value', 'e1', 'e2', 'e3', 'e4','e5']
     rows = []
     for centNum in range(len(order_centroids)):
         row = []
         row.append(str(centNum))
-        print('Cluster: ' + str(centNum))
+        print('Value: ' + str(centNum))
         for idx in range(5):
             row.append(featureNames[order_centroids[centNum][idx]])
             print('  ' + featureNames[order_centroids[centNum][idx]]) 

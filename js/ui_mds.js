@@ -97,7 +97,7 @@ function drawScatter(){
                     return plotSVG.node().getBoundingClientRect().width / 2;
                 })
                 .attr('y', 20)
-                .text('Cluster: ' + d.cluster);
+                .text('Similarity: ' + d.cluster);
             
             // outline all circles in the cluster
             let clusterCircles = scatterCanvas.selectAll('.cluster' + d.cluster)
@@ -159,7 +159,7 @@ function drawScatter(){
                     return plotSVG.node().getBoundingClientRect().width / 2;
                 })
                 .attr('y', 20)
-                .text('Cluster: --');
+                .text('Similarity: --');
             // remove tooltip
             d3.selectAll('.tooltip').remove();
 
@@ -225,7 +225,7 @@ function drawLegend(){
             return (i *20 + 20) - (col * 100);
         })
         .text(function(d){
-            return 'Cluster: ' + d.cluster;
+            return 'Disease#: ' + d.cluster;
         })
         .on("mousemove",function (mouseData,d){
             let scatterCanvas = d3.select('.circleGrp');

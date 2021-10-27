@@ -92,7 +92,7 @@ function drawList(){
           tmpDiv
                 .append('span')
                 .classed('clusterName', true)
-                .html(' Cluster: ' + dataClusters[i].cluster);
+                .html(' Disease List: ' + dataClusters[i].cluster);
           
           // if the cluster has been expanded then display filenames in cluster
           if(dataClusters[i].expanded== 1){
